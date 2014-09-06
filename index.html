@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Anahita + Ember = Katniss</title>
+  <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/normalize/2.1.0/normalize.css">
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+  <script src="http://builds.handlebarsjs.com.s3.amazonaws.com/handlebars-v1.3.0.js"></script>
+  <script src="http://builds.emberjs.com/tags/v1.7.0/ember.js"></script>
+  <script src="http://builds.emberjs.com/canary/ember-data.js"></script>
+  <link rel="stylesheet" href="/templates/shiraz/css/style1/style.css" type="text/css">
+  <script src="app.js"></script>
+</head>
+<body>
+
+  <script type="text/x-handlebars">
+    <div class="navbar navbar-fixed-top">
+        <div class="navbar-inner">
+            <div class="container">
+                <a class="brand brand-logo" href="/katniss">Katniss</a>
+                <div class="nav-collapse collapse">
+                    <ul class="nav">
+                        <li>{{#link-to 'people'}}People{{/link-to}}</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        {{outlet}}
+    </div>
+  </script>
+  
+  <script type="text/x-handlebars" data-template-name="index">
+    <h2>Welcome to Ember.js</h2>
+    <ul>
+    {{#each item in model}}
+      <li>{{item}}</li>
+    {{/each}}
+    </ul>
+  </script>
+  
+    <script type="text/x-handlebars" data-template-name="people">
+        <div class="span8">
+            <div class="block">
+                <div class="an-entities-wrapper">
+                    <div class="an-entities" id="an-entities-main">
+                        {{#each person in model}}
+                            <div class="an-entity an-record dropdown-actions">
+                                <div class="clearfix">
+                                    <div class="entity-portrait-square">
+                                        {{#link-to 'person' person class="actor-avatar-link"}}
+                                            <img src="/media/lib_anahita/images/avatar/square_default.gif" id="actor-avatar-square-1" size="square" class="actor-avatar square">
+                                        {{/link-to}}
+                                    </div>
+
+                                    <div class="entity-container">
+                                        <h3 class="entity-name">
+                                            {{#link-to 'person' person}}{{person.name}}{{/link-to}}
+                                        </h3>
+
+                                        <div class="entity-meta">
+                                            {{person.followerCount}} <span class="stat-name">Followers</span> / {{person.leaderCount}} <span class="stat-name">Leaders</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="entity-description">
+                                    {{person.body}}
+                                </div>
+                            </div>
+                        {{/each}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </script>
+    
+    <script type="text/x-handlebars" data-template-name="person">
+        <div class="row">
+            <div class="span2">
+                <img src="/media/lib_anahita/images/avatar/medium_default.gif" class="actor-avatar medium"/>
+            </div>
+            <div class="span6">
+                <h2>{{name}}</h2>
+                <div>{{description}}</div>
+                <div class="profile-tab-content">
+                    <div data-behavior="Load" data-load-options="{'element':'.gadget-content','event':'visible'}" class="an-gadget ">
+                        <h2 class="gadget-title">Stories</h2>
+                        <div class="gadget-content">    
+                            <div id="an-stories class="an-entities an-stories">
+                                <div class="alert alert-info alert-block">
+                                    <p>No posts available</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="span4">
+                <div class="gadget-content">
+                    <div class="an-socialgraph-stat">
+                        <div class="stat-count">
+                            {{followerCount}} <span class="stat-name">Followers</span>
+                        </div>
+                        <div class="stat-count">
+                            {{leaderCount}} <span class="stat-name">Leaders</span>
+                        </div>
+                    </div>
+                <div class="alert alert-info alert-block"><p>Empty Graph</p></div></div>
+            </div>
+        </div>
+    </script>
+
+</body>
+</html>
